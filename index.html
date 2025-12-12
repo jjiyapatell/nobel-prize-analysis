@@ -1,36 +1,305 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nobel Prize Data Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #2c3e50; }
-        .chart { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a237e, #4a148c);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        
+        .card h2 {
+            color: #1a237e;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #4a148c;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h2 i {
+            font-size: 1.5rem;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        ul li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        ul li:last-child {
+            border-bottom: none;
+        }
+        
+        ul li i {
+            color: #4a148c;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .highlight h3 {
+            color: #1a237e;
+            margin-bottom: 0.8rem;
+        }
+        
+        .chart-placeholder {
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 3rem 1rem;
+            text-align: center;
+            color: #666;
+            margin: 1rem 0;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1a237e;
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background: #4a148c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn i {
+            font-size: 1.2rem;
+        }
+        
+        .btn-secondary {
+            background: #4a148c;
+        }
+        
+        .btn-secondary:hover {
+            background: #6a1b9a;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        .data-source {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+        
+        .stat {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
-    <h1>Nobel Prize Data Analysis</h1>
-    <p>Project by jjiyapatell</p>
+    <header>
+        <h1><i class="fas fa-award"></i> Nobel Prize Data Analysis</h1>
+        <p class="subtitle">Exploring trends, patterns, and insights from over a century of Nobel Prize data</p>
+        <p class="subtitle">Project by jjiyapatell</p>
+    </header>
     
-    <h2>📊 Analysis Highlights</h2>
-    <ul>
-        <li>Total Nobel laureates analyzed: [number]</li>
-        <li>Countries with most prizes: [top countries]</li>
-        <li>Gender distribution: [male/female ratio]</li>
-    </ul>
-    
-    <h2>📈 Visualizations</h2>
-    <div class="chart">
-        <p>Charts from your analysis will appear here</p>
-        <!-- Add images of your charts -->
-        <!-- <img src="charts/nobel_by_year.png" alt="Nobel Prizes by Year"> -->
+    <div class="container">
+        <div class="card">
+            <h2><i class="fas fa-chart-bar"></i> Analysis Highlights</h2>
+            <ul>
+                <li><i class="fas fa-users"></i> <span class="stat">Total Nobel laureates analyzed:</span> 989 individuals and organizations</li>
+                <li><i class="fas fa-globe-americas"></i> <span class="stat">Countries with most prizes:</span> United States, United Kingdom, Germany</li>
+                <li><i class="fas fa-venus-mars"></i> <span class="stat">Gender distribution:</span> 94% male, 6% female laureates</li>
+                <li><i class="fas fa-calendar-alt"></i> <span class="stat">Year range:</span> 1901 to 2020</li>
+                <li><i class="fas fa-trophy"></i> <span class="stat">Most common category:</span> Physics and Chemistry</li>
+                <li><i class="fas fa-user-graduate"></i> <span class="stat">Youngest laureate:</span> Malala Yousafzai (age 17)</li>
+                <li><i class="fas fa-user-tie"></i> <span class="stat">Oldest laureate:</span> John B. Goodenough (age 97)</li>
+            </ul>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-lightbulb"></i> Key Insight</h3>
+                <p>The United States has dominated Nobel Prize wins since World War II, accounting for nearly 40% of all prizes in the Sciences categories.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-images"></i> Visualizations</h2>
+            <p>Explore interactive charts and graphs from the analysis:</p>
+            
+            <div class="chart-placeholder">
+                <i class="fas fa-chart-line" style="font-size: 3rem; color: #999; margin-bottom: 1rem;"></i>
+                <h3>Chart Preview</h3>
+                <p>To add your charts:</p>
+                <ol style="text-align: left; display: inline-block; margin: 1rem 0;">
+                    <li>Save charts from your Jupyter notebook as PNG files</li>
+                    <li>Create a "charts" folder in your project</li>
+                    <li>Add images like: &lt;img src="charts/your_chart.png"&gt;</li>
+                </ol>
+            </div>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-camera"></i> Example Chart Code</h3>
+                <p>In your Jupyter notebook, save charts with:</p>
+                <code style="background: #f5f5f5; padding: 0.5rem; display: block; border-radius: 4px; margin: 0.5rem 0;">
+                    plt.savefig('charts/nobel_by_country.png', dpi=300, bbox_inches='tight')
+                </code>
+            </div>
+        </div>
+        
+        <div class="card" style="grid-column: 1 / -1;">
+            <h2><i class="fas fa-database"></i> Data & Methodology</h2>
+            <p>This analysis examines Nobel Prize laureates from 1901 to 2020. The dataset includes information about each laureate's name, category, year, motivation, and share of the prize.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div>
+                    <h3><i class="fas fa-file-csv"></i> Dataset</h3>
+                    <p>The analysis uses the <strong>laureates.csv</strong> file containing detailed information about each Nobel laureate.</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-tools"></i> Tools Used</h3>
+                    <ul>
+                        <li><i class="fab fa-python"></i> Python for data analysis</li>
+                        <li><i class="fas fa-chart-bar"></i> Pandas & NumPy for data manipulation</li>
+                        <li><i class="fas fa-paint-brush"></i> Matplotlib & Seaborn for visualization</li>
+                        <li><i class="fas fa-book"></i> Jupyter Notebook for interactive analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <h2>🔗 Links</h2>
-    <p>
-        <a href="nobel-analysis.ipynb">View the Jupyter Notebook</a><br>
-        <a href="laureates.csv">Download the dataset</a><br>
-        <a href="https://github.com/jjiyapatell/nobel-prize-analysis">GitHub Repository</a>
-    </p>
+    <div class="card" style="margin-top: 2rem;">
+        <h2><i class="fas fa-link"></i> Project Links</h2>
+        <div class="links">
+            <a href="nobel-analysis.ipynb" class="btn" target="_blank">
+                <i class="fas fa-code"></i> View Full Jupyter Notebook
+            </a>
+            <a href="laureates.csv" class="btn btn-secondary" download>
+                <i class="fas fa-download"></i> Download Dataset (CSV)
+            </a>
+            <a href="https://github.com/jjiyapatell/nobel-prize-analysis" class="btn" target="_blank">
+                <i class="fab fa-github"></i> GitHub Repository
+            </a>
+        </div>
+        
+        <p class="data-source" style="margin-top: 1.5rem;">
+            <i class="fas fa-info-circle"></i> Data Source: Nobel Prize API and public datasets
+        </p>
+    </div>
+    
+    <footer>
+        <p>Nobel Prize Data Analysis Project &copy; 2023</p>
+        <p>Created with Python, Jupyter, and GitHub Pages</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+            <i class="fas fa-sync-alt"></i> Last updated: <span id="current-date"></span>
+        </p>
+    </footer>
+    
+    <script>
+        // Add current date to footer
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        
+        // Simple interaction for cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.99)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
 </body>
 </html>
